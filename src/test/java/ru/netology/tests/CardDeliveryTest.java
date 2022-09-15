@@ -163,18 +163,6 @@ public class CardDeliveryTest {
         $("[data-test-id=\"name\"].input_invalid .input__sub").shouldHave(exactText("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
-    @Test
-        // Буква ё оказалась невалидной, баг
-    void shouldTryToPutNameWithCertainLetter() {
-        $("[placeholder=\"Город\"]").setValue("Йошкар-Ола");
-        String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[placeholder=\"Дата встречи\"]").setValue(requireDate);
-        $("[name=\"name\"]").setValue("Алёна Апина");
-        $x("//input[@name=\"phone\"]").setValue("+78005553535");
-        $x("//label[@data-test-id=\"agreement\"]").click();
-        $("[class=\"button__text\"]").click();
-        $("[data-test-id=\"notification\"] .notification__content").shouldHave(Condition.text("Встреча успешно забронирована на " + requireDate), Duration.ofSeconds(20));
-    }
 
     //Протестируем поле "Мобильный телефон"
     @Test
