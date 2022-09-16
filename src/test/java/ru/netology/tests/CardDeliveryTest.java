@@ -36,7 +36,7 @@ public class CardDeliveryTest {
         $x("//input[@name=\"phone\"]").setValue("+78005553535");
         $x("//label[@data-test-id=\"agreement\"]").click();
         $("[class=\"button__text\"]").click();
-        $("[data-test-id=\"notification\"] .notification__content").shouldHave(Condition.text("Встреча успешно забронирована на " + requireDate), Duration.ofSeconds(20));
+        $("[data-test-id=\"notification\"] .notification__content").shouldHave(Condition.text("Встреча успешно забронирована на " + requireDate), Duration.ofSeconds(15));
     }
 
     @Test
@@ -161,6 +161,18 @@ public class CardDeliveryTest {
         $x("//label[@data-test-id=\"agreement\"]").click();
         $("[class=\"button__text\"]").click();
         $("[data-test-id=\"name\"].input_invalid .input__sub").shouldHave(exactText("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
+    }
+
+    @Test
+    void shouldTryToPutNameWithSpecialLetter() {
+        $("[placeholder=\"Город\"]").setValue("Йошкар-Ола");
+        String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        $("[placeholder=\"Дата встречи\"]").setValue(requireDate);
+        $("[name=\"name\"]").setValue("Алёна Апина");
+        $x("//input[@name=\"phone\"]").setValue("+78005553535");
+        $x("//label[@data-test-id=\"agreement\"]").click();
+        $("[class=\"button__text\"]").click();
+        $("[data-test-id=\"notification\"] .notification__content").shouldHave(Condition.text("Встреча успешно забронирована на " + requireDate), Duration.ofSeconds(15));
     }
 
 
