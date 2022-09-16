@@ -22,8 +22,6 @@ public class CardDeliveryTest {
     void setUp() {
         open("http://localhost:9999/");
         $("[placeholder=\"Дата встречи\"]").doubleClick().sendKeys(Keys.DELETE);
-
-
     }
 
     @Test
@@ -54,7 +52,7 @@ public class CardDeliveryTest {
 
     //протестируем поле "Выберете ваш город"
     @Test
-    void shouldTryToNotContainsFillCities() {
+    void shouldTryToNotFillFieldCities() {
         $("[placeholder=\"Город\"]").setValue("");
         String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[placeholder=\"Дата встречи\"]").setValue(requireDate);
@@ -66,7 +64,7 @@ public class CardDeliveryTest {
     }
 
     @Test
-    void shouldTryToPutIncorrectValuesFillCities1() {
+    void shouldTryToPutIncorrectValuesFieldCities1() {
         $("[placeholder=\"Город\"]").setValue("Moscow");
         String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[placeholder=\"Дата встречи\"]").setValue(requireDate);
@@ -78,7 +76,7 @@ public class CardDeliveryTest {
     }
 
     @Test
-    void shouldTryToPutIncorrectValuesFillCities2() {
+    void shouldTryToPutIncorrectValuesFieldCities2() {
         $("[placeholder=\"Город\"]").setValue("Дзержинск");
         String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[placeholder=\"Дата встречи\"]").setValue(requireDate);
@@ -90,7 +88,7 @@ public class CardDeliveryTest {
     }
 
     @Test
-    void shouldTryToPutIncorrectValuesFillCities3() {
+    void shouldTryToPutIncorrectValuesFieldCities3() {
         $("[placeholder=\"Город\"]").setValue("7");
         String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[placeholder=\"Дата встречи\"]").setValue(requireDate);
@@ -103,7 +101,7 @@ public class CardDeliveryTest {
 
     //Протестируем поле "Дата встречи"
     @Test
-    void shouldTryToNotContainsFillDate() {
+    void shouldTryToNotContainsFieldDate() {
         $("[placeholder=\"Город\"]").setValue("Йошкар-Ола");
         $("[placeholder=\"Дата встречи\"]").doubleClick().sendKeys(Keys.DELETE);
         //String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
@@ -215,7 +213,7 @@ public class CardDeliveryTest {
 
     // игнорируем чекбокс
     @Test
-    void ShouldTryToNotClickOnTheCheckBox() {
+    void shouldTryToNotClickOnTheCheckBox() {
         $("[placeholder=\"Город\"]").setValue("Йошкар-Ола");
         String requireDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[placeholder=\"Дата встречи\"]").setValue(requireDate);
@@ -226,5 +224,6 @@ public class CardDeliveryTest {
         $("[data-test-id=\"agreement\"].input_invalid").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
 
     }
+
 }
 
